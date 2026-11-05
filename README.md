@@ -2,6 +2,8 @@
 
 Stanley Ezendiokwere · Student ID 301915953
 
+This portfolio fulfills the requested course content.
+
 The portfolio uses fictional records for Public Transport / Metro Ticketing System.
 
 - [Portfolio 1](portfolio-1-database-design/)
