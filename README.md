@@ -1,7 +1,7 @@
 # Advanced Database Systems & Cloud Portfolio
 **Student Name:** Stanley Ezendiokwere  
 **Student ID:** 301915953  
-**Institution:** MIVA Open University (Batch 8)[cite: 1]  
+**Institution:** MIVA Open University
 
 ---
 
