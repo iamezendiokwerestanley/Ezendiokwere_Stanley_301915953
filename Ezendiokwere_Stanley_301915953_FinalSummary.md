@@ -4,11 +4,11 @@
 
 ## Case study
 
-My case study is Public Transport / Metro Ticketing System. I designed the database for synthetic riders purchasing tickets, station staff reviewing validation activity and analysts summarizing synthetic station usage, with separate tables named station, rider, fare_product, ticket and validation_event. It supports these operations: maintain stations and fare products; issue and manage rider tickets; record ticket entry and exit validations; review and summarize validation activity.
+For this database case study, I architected a comprehensive relational schema for a metropolitan transit ticketing system. The solution models operational workflows for synthetic riders purchasing transit passes, station staff monitoring validation activity, and data analysts evaluating station utilization. Built around five core entities—stations, riders, fare products, tickets, and validation events—the system seamlessly supports end-to-end transit operations, including managing station infrastructure and fare tiers, issuing and tracking commuter tickets, logging entry and exit validation activity, and generating high-level usage analytics.
 
 ## Portfolio 1: Database Design and Modelling
 
-I organised the relational design into 5 tables. Primary keys identify records, foreign keys preserve the links, and checks enforce the stated business rules. A rider may have at most one ticket whose status is active, enforced by a partial unique index on rider_id for active tickets. The normalisation examples show the sample data at 1NF, 2NF and 3NF. All 40 deliberately invalid inserts were rejected without changing the valid sample rows.
+Structurally, I organized the relational architecture into five dedicated tables. I enforced data integrity through primary keys for record identification, foreign keys to maintain referential transparency, and check constraints to uphold business logic. To handle edge cases—such as ensuring a commuter can only hold one active ticket at a time—I implemented a partial unique index on the rider_id for active statuses. The documentation walks through normalization examples demonstrating how the sample data transitions from 1NF through 3NF, while rigorous testing confirmed that all 40 deliberately invalid inserts were correctly rejected without compromising valid records.
 
 ![Public Transport / Metro Ticketing System ER diagram](images/Ezendiokwere_Stanley_301915953_ERDiagram.png)
 
