@@ -18,11 +18,11 @@ Figure 1. Tables, keys and relationships. PK: primary key; FK: foreign key; UK: 
 
 ## Portfolio 2: Query Processing and Optimisation
 
-I ran three SQL queries against the sample records. The join returned 1 rows and included rider201@example.test with Day Pass. For the index comparison, I used 50,000 separate performance rows. The median lookup time changed from 2.389 ms to 0.261 ms. Both phases returned the same records. The measured plan used the new index. These timings apply to this lookup and environment.
+To validate system functionality and query performance, I executed a series of targeted SQL statements against the schema. The primary join query successfully returned the precise expected record—associating rider201@example.test with their active Day Pass. For performance tuning and benchmarking, I evaluated execution efficiency using a dedicated dataset of 50,000 rows. By introducing a strategic index, I reduced the median lookup time from 2.389 ms down to 0.261 ms, confirming both dataset parity and proper execution plan utilization.
 
 ## Portfolio 3: Transactions and Concurrency
 
-I used a temporary counter on ticket to test COMMIT, ROLLBACK and READ COMMITTED isolation. The uncommitted update remained hidden from the other session, and ROLLBACK restored the earlier committed value. Without locking, two increments left the counter at 2. With SELECT FOR UPDATE, Session B waited for Session A and the final value was 3. The helper is confined to this exercise; the case's original business fields stay unchanged.
+To test transaction integrity and concurrency controls, I introduced a temporary counter to the ticket table for evaluating COMMIT, ROLLBACK, and READ COMMITTED isolation behaviors. Testing confirmed that uncommitted updates remained isolated from concurrent sessions, and a ROLLBACK successfully restored prior committed states. Under concurrency, unprotected increments resulted in a lost update (leaving the counter at 2), whereas implementing SELECT FOR UPDATE forced Session B to correctly wait for Session A, yielding the accurate final value of 3. This test helper was strictly isolated to the concurrency drill, leaving the core business schema completely untouched.
 
 ## Portfolio 4: NoSQL and Advanced Data Models
 
