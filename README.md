@@ -6,7 +6,7 @@
 ---
 
 ## Repository Overview
-This repository contains the comprehensive portfolio assignments and practical implementations for the Advanced Database Systems and Cloud Architectures course. The work demonstrates end-to-end competency in relational database design, advanced query tuning, transaction management, NoSQL data modeling, and distributed cloud database strategies.
+This repository houses my complete portfolio assignments and practical implementations for Advanced Database Systems and Cloud Architectures. The work showcases end-to-end technical competency across relational database design, advanced query optimisation, transaction management, NoSQL data modelling, and distributed cloud database strategies.
 
 ---
 
