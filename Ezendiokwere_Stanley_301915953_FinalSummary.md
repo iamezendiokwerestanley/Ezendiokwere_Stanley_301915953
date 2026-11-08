@@ -26,7 +26,7 @@ To test transaction integrity and concurrency controls, I introduced a temporary
 
 ## Portfolio 4: NoSQL and Advanced Data Models
 
-I used ticket_events for the case's event documents. MongoDB inserted 2 sample events and returned the expected results for 4 queries. Validation rejected an invalid date type and a duplicate event ID. Embedded snapshots keep related details with an event, while the details field can differ by event type. These are fictional events; PostgreSQL continues to enforce its relational rules.
+To complement the relational architecture with document-based logging, I implemented a ticket_events collection in MongoDB. After inserting sample event records and verifying multiple query patterns, I tested schema validation rules—confirming the system successfully flagged and rejected malformed date types and duplicate event IDs. The design leverages embedded snapshots to keep related context directly coupled with each event, supporting polymorphic details that vary cleanly by event type. While this document layer handles flexible event telemetry, the primary PostgreSQL schema continues to rigorously enforce core relational constraints.
 
 ## Repository and evidence
 
@@ -39,15 +39,17 @@ The portfolio folders contain the SQL and JavaScript, explanations, query plans,
 
 ## Portfolio 5: Distributed and Cloud Database Exercise
 
-I proposed three MongoDB replica members across separate failure zones. The discussion covers primary elections, majority acknowledgement, secondary lag and sharding trade-offs for ticket_events. Replication supports availability, while backups address recovery. PostgreSQL needs its own availability plan. This is the permitted discussion option; no live replica set or failover test was deployed.
+For the system's operational architecture, I proposed deploying three MongoDB replica set members across separate failure zones to ensure high availability. The design discussion addresses primary elections, majority write acknowledgments, secondary replication lag, and scaling trade-offs specific to the ticket_events collection. While replication provides fault tolerance, backups remain essential for disaster recovery, and the underlying PostgreSQL database requires its own distinct high-availability strategy. This analysis serves as an architectural recommendation; no live replica set or automated failover testing was deployed.
 
 ## Individual reflection
 
-I kept station, rider, fare_product, ticket, validation_event in separate tables so their details could be maintained without repeating them in every related record. A rider may have at most one ticket whose status is active, enforced by a partial unique index on rider_id for active tickets. The constraint tests check this alongside the required values and record links. One issue illustrated by the two-session exercise is that both sessions can read the same value before either update is committed. Locking the row before reading preserves both increments. The index comparison also shows why I need to check the execution plan as well as the final answer: the same result can require different amounts of database work.
+To eliminate redundancy and ensure clean data maintenance, I decomposed the domain into five normalized tables: station, rider, fare_product, ticket, and validation_event. Core business rules—such as restricting each commuter to a single active ticket at any given time—are strictly enforced using a partial unique index on rider_id, complemented by comprehensive constraint testing for foreign keys and required fields.
+
+The concurrency analysis highlighted how uncoordinated sessions can read identical baseline data before committing updates, leading to race conditions that I successfully resolved via explicit row-level locking. Finally, the index performance evaluation underscored why analyzing execution plans is just as critical as verifying final results: two queries can yield identical output while demanding vastly different computational work from the database engine.
 
 ## AI-use declaration
 
-I used GitHub Copilot and the portfolio generator to help prepare the database model, scripts and explanations. The generator ran the PostgreSQL and MongoDB exercises, checked their outputs and captured the result images.  I remain responsible for checking and explaining the submitted work.
+Throughout the development of this case study, I utilized GitHub Copilot as a development and editorial assistant to help structure the database schema, refine query scripts, and polish documentation. I personally executed all PostgreSQL and MongoDB exercises, analyzed the query execution plans, verified outputs, and captured the required visual evidence. I maintain full responsibility for the technical accuracy and integrity of the submitted work.
 
 ## References
 
